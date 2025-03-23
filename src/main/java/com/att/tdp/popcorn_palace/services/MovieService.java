@@ -34,22 +34,8 @@ public class MovieService {
             return null;
         }
 
-        if (movie.getGenre() != null) {
-            updatedMovie.get().setGenre(movie.getGenre());
-        }
-
-        if (movie.getDuration() != null) {
-            updatedMovie.get().setDuration(movie.getDuration());
-        }
-
-        if (movie.getRating() != null) {
-            updatedMovie.get().setRating(movie.getRating());
-        }
-
-        if (movie.getReleaseYear() != null) {
-            updatedMovie.get().setReleaseYear(movie.getReleaseYear());
-        }
-
+        // set null fields that required for updating data INTO movie
+        prepareToUpdateMovieData(updatedMovie.get(), movie);
 
         return this.movieRepository.save(updatedMovie.get());
     }
@@ -72,5 +58,23 @@ public class MovieService {
     public Movie findMovieByTitle(String title) {
         Optional<Movie> movie = this.movieRepository.findByTitle(title);
         return movie.orElse(null);
+    }
+
+    private void prepareToUpdateMovieData(Movie upadatedMovie, Movie newMovie) {
+        if (newMovie.getGenre() != null) {
+            upadatedMovie.setGenre(newMovie.getGenre());
+        }
+
+        if (newMovie.getDuration() != null) {
+            upadatedMovie.setDuration(newMovie.getDuration());
+        }
+
+        if (newMovie.getRating() != null) {
+            upadatedMovie.setRating(newMovie.getRating());
+        }
+
+        if (newMovie.getReleaseYear() != null) {
+            upadatedMovie.setReleaseYear(newMovie.getReleaseYear());
+        }
     }
 }

@@ -47,37 +47,17 @@ public class ShowtimeService {
             return null;
         }
 
-        // set null fields that required for finding conflicts
-        if (showtime.getTheater() == null){
-            showtime.setTheater(updatedShowtime.get().getTheater());
-        }
-
-        if (showtime.getStartTime() == null){
-            showtime.setStartTime(updatedShowtime.get().getStartTime());
-        }
-
-        if (showtime.getEndTime() == null){
-            showtime.setEndTime(updatedShowtime.get().getEndTime());
-        }
+        // set null fields that required for finding conflicts or updating data INTO showtime
+        prepareToUpdateShowtimeData(updatedShowtime.get(), showtime);
 
         // search for conflicts
-        List<Showtime> showtimeConflicts = this.showtimeRepository.findConflictingBetweenShowtimesWithoutCurrent(showtime.getTheater(),
-        showtime.getStartTime(), showtime.getEndTime(), showtimeId);
+        List<Showtime> showtimeConflicts = this.showtimeRepository.findConflictingBetweenShowtimesWithoutCurrent
+                (showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime(), showtimeId);
 
         if (!showtimeConflicts.isEmpty()) {
             return null;
         }
 
-        // set all fields before saving updates
-        if (showtime.getPrice() == null ){
-            showtime.setPrice(updatedShowtime.get().getPrice());
-        }
-
-        if (showtime.getMovieId() == null){
-            showtime.setMovieId(updatedShowtime.get().getMovieId());
-        }
-
-        showtime.setId(showtimeId);
         return this.showtimeRepository.save(showtime);
     }
 
@@ -107,5 +87,28 @@ public class ShowtimeService {
         return this.showtimeRepository.findIdsByMovieId(movieId);
     }
 
+    private void prepareToUpdateShowtimeData(Showtime fromShowtime, Showtime toShowtime){
+        if (toShowtime.getTheater() == null){
+            toShowtime.setTheater(fromShowtime.getTheater());
+        }
+
+        if (toShowtime.getStartTime() == null){
+            toShowtime.setStartTime(fromShowtime.getStartTime());
+        }
+
+        if (toShowtime.getEndTime() == null){
+            toShowtime.setEndTime(fromShowtime.getEndTime());
+        }
+
+        if (toShowtime.getPrice() == null ){
+            toShowtime.setPrice(fromShowtime.getPrice());
+        }
+
+        if (toShowtime.getMovieId() == null){
+            toShowtime.setMovieId(fromShowtime.getMovieId());
+        }
+
+        toShowtime.setId(fromShowtime.getId());
+    }
 
 }
