@@ -11,6 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+This class responsible to managing the requests and responses for the Booking entities of the Bookings table.
+holds the BookingService.
+No complex logic is presented in this class.
+This class is transfers the requests to service function calls. And the output of the services to responses msgs.
+
+*Note that there is no instance of DeleteManager here since not straightforward deletion is possible via the API
+    deletion of Booking entities is only possible when deletes a whole Showtime entity or a whole Movie entity
+        (and then all the booking that pointing to them is deletes as well in a deep delete process).
+ */
+
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {

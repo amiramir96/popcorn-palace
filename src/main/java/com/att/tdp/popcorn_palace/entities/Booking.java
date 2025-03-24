@@ -1,6 +1,5 @@
 package com.att.tdp.popcorn_palace.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -11,8 +10,16 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-//{ "showtimeId": 1, "seatNumber": 15 , userId:"84438967-f68f-4fa0-b620-0f08217e76af"}
-//{ "bookingId":"d1a6423b-4469-4b00-8c5f-e3cfc42eacae" }
+/*
+This class represent Booking entity for the API
+fields defined to be non-null.
+
+entity request example POST
+{ "showtimeId": 1, "seatNumber": 15 , userId:"84438967-f68f-4fa0-b620-0f08217e76af"}
+response:
+{ "bookingId":"d1a6423b-4469-4b00-8c5f-e3cfc42eacae" }
+ */
+
 @Setter
 @Getter
 @Entity

@@ -9,6 +9,12 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.List;
 
+/*
+framework repository of JPA
+helpful to communicate via to the dbs
+this repository would manage the calls for the Showtime table
+ */
+
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long>{
     Optional<Showtime> findByTheater(String title);
     void deleteAllByMovieId(Long movieId);

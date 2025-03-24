@@ -10,6 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/*
+This class responsible to managing the requests and responses for the Showtime entities of the Showtime table.
+holds the ShowtimeService and DeleteManageService.
+No complex logic is presented in this class.
+This class is transfers the requests to service function calls. And the output of the services to responses msgs.
+ */
+
 @RestController
 @RequestMapping("/showtimes")
 public class ShowtimeController {

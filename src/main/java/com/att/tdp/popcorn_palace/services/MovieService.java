@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/*
+The logic class with functionality for the Movie objects and Movies table.
+This class supports Add, Update, Get, GetAll, Delete, actions for Movie entities.
+In addition, all functions got logs to monitor the functioning of the program.
+ */
+
 @Service
 public class MovieService {
 

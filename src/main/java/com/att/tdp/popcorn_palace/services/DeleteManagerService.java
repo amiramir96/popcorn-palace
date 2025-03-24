@@ -7,6 +7,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*
+The logic class that responsible on the deep Deletion of entities from the database.
+the dependency architecture of the program is such that:
+
+pointers:
+Booking -> Showtime -> Movie
+means the BookingService holds the instance ShowtimeService
+      the ShowtimeService holds the instance of MovieService
+BUT
+Since by deletion of Movie there is need to activate deep deletion of showtime and bookings that pointer above.
+Its would make a circular dependency.
+Then, i decided to create a class that would hold the whole three services and manage the deep deletion actions
+            this way, i avoided from the circular dependency.
+*/
+
 @Service
 public class DeleteManagerService {
 

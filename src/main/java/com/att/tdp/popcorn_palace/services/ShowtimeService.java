@@ -10,6 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/*
+The logic class with functionality for the Showtime entities and Showtime table.
+This class supports Add, Update, Get, Delete, actions for Showtime entities.
+In addition, all functions got logs to monitor the functioning of the program.
+
+This class holds pointer to the MovieService of the program since every showtime point to movie by movieId field.
+ */
+
 @Service
 public class ShowtimeService {
 

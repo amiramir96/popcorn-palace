@@ -1,6 +1,5 @@
 package com.att.tdp.popcorn_palace.entities;
 
-import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -10,8 +9,16 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-//{ "movieId": 1, "price":20.2, "theater": "Sample Theater", "startTime": "2025-02-14T11:47:46.125405Z",
-//      "endTime": "2025-02-14T14:47:46.125405Z" }
+/*
+This class represent Movie entity for the API
+fields defined to be non-null.
+
+entity request example POST
+{ "movieId": 1, "price":20.2, "theater": "Sample Theater", "startTime": "2025-02-14T11:47:46.125405Z",
+      "endTime": "2025-02-14T14:47:46.125405Z" }
+response:
+{ "id": 1, "price":50.2,"movieId": 1, "theater": "Sample Theater", "startTime": "2025-02-14T11:47:46.125405Z", "endTime": "2025-02-14T14:47:46.125405Z" }
+*/
 
 @Setter
 @Getter

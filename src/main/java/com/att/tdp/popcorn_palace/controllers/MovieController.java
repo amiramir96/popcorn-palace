@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+This class responsible to managing the requests and responses for the Movie entities of the Movies table.
+holds the MovieService and DeleteManageService.
+No complex logic is presented in this class.
+This class is transfers the requests to service function calls. And the output of the services to responses msgs.
+ */
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {

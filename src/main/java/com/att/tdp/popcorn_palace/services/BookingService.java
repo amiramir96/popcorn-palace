@@ -11,6 +11,14 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+/*
+The logic class with functionality for the Showtime entities and Showtime table.
+This class supports Add, Update, Get, Delete, actions for Showtime entities.
+In addition, all functions got logs to monitor the functioning of the program.
+
+This class holds pointer to the ShowtimeService of the program since every booking point to showtime by showtimeId field.
+ */
+
 @Service
 public class BookingService {
 
