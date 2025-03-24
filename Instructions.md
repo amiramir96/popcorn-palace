@@ -21,7 +21,7 @@ This guide will walk you through setting up and running the application locally.
    git clone https://github.com/amiramir96/popcorn-palace.git
    ```
 
-2. **Install dependencies (optional if you use spring-boot:run):**
+2. **Install dependencies:**
    ```Terminal:
    ./mvnw clean install
    ```
