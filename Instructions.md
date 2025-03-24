@@ -65,9 +65,11 @@ can download it here: https://www.postman.com/downloads/
 
 - You can change DB settings in `src/main/resources/application.yaml`
 - Use valid ISO 8601 timestamps (UTC) for `startTime` and `endTime` fields in JSON for requests of `/showtimes`.
-- Use valid UUID for BookingId fields in JSON for POST requests of `/bookings`.
-- Make sure port 5432 is available and pointing to your Docker container (if used)
-- Make sure port 8080 is available before running the app
+- Use valid UUID for `bookingId` fields in JSON for POST requests of `/bookings`.
+  
+Before running the application
+- Make sure port 5432 is available
+- Make sure port 8080 is available
 
 ---
 
