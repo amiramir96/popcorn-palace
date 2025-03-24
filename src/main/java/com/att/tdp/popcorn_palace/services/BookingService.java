@@ -3,6 +3,8 @@ package com.att.tdp.popcorn_palace.services;
 import com.att.tdp.popcorn_palace.entities.Booking;
 import com.att.tdp.popcorn_palace.entities.Showtime;
 import com.att.tdp.popcorn_palace.repositories.BookingRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -14,6 +16,7 @@ public class BookingService {
 
     private final ShowtimeService showtimeService;
     private final BookingRepository bookingRepository;
+    private final Logger logger = LoggerFactory.getLogger(BookingService.class);
 
     public BookingService(ShowtimeService showtimeService, BookingRepository bookingRepository) {
         this.showtimeService = showtimeService;
@@ -26,27 +29,41 @@ public class BookingService {
 
         // ticket is taken         OR showtime not exists OR   showtime already started
         if(ticketTaken.isPresent() || showtime == null || Instant.now().isAfter(showtime.getStartTime())){
+            logger.warn("Can't book seat number {} of showtime {}.", newBooking.getSeatNumber(), newBooking.getShowtimeId());
             return null;
         }
 
-        return this.bookingRepository.save(newBooking);
+        try{
+            Booking addedBooking = this.bookingRepository.save(newBooking);
+            logger.info("Booking {} added successfully.", addedBooking.getBookingId());
+            return addedBooking;
+        } catch (Exception e) {
+            logger.error("Error: failed to book seat {} in showtime {}. Error: {}",
+                    newBooking.getSeatNumber(), newBooking.getShowtimeId(), e.getMessage(), e);
+            return null;
+
+        }
     }
 
     public boolean deleteAllBookingsByShowtimeId(Long showtimeId) {
         try{
             this.bookingRepository.deleteAllByShowtimeId(showtimeId);
+            logger.info("Info: all bookings of showtime {} deleted successfully", showtimeId);
+            return true;
         } catch (Exception e){
+            logger.error("Error: failed to delete bookings of showtime {}. Error: {}", showtimeId, e.getMessage(), e);
             return false;
         }
-        return true;
     }
 
     public boolean deleteAllBookingsByShowtimeIds(List<Long> showtimeIds){
         try {
             this.bookingRepository.deleteByShowtimeIdIn(showtimeIds);
+            logger.info("Info: all bookings of showtime {} deleted successfully", showtimeIds);
+            return true;
         } catch (Exception e) {
+            logger.error("Error: failed to delete bookings of showtime {}. Error: {}", showtimeIds, e.getMessage(), e);
             return false;
         }
-        return true;
     }
 }

@@ -40,11 +40,11 @@ public class MovieService {
         }
     }
 
-    public Movie updateMovieByTitle(String title, Movie movie) {
-        Optional<Movie> updatedMovie = this.movieRepository.findByTitle(title);
+    public Movie updateMovieByTitle(String movieTitle, Movie movie) {
+        Optional<Movie> updatedMovie = this.movieRepository.findByTitle(movieTitle);
 
         if (updatedMovie.isEmpty()) {
-            logger.warn("movie with title {} not found, failed to update non-existing movie", title);
+            logger.warn("movie with title {} not found, failed to update non-existing movie", movieTitle);
             return null;
         }
 
@@ -56,25 +56,25 @@ public class MovieService {
             logger.info("Info: movie {} updated successfully", resultMovie.getTitle());
             return resultMovie;
         }catch (Exception e){
-            logger.error("Error: failed to update movie {}. Error: {}", title, e.getMessage(), e);
+            logger.error("Error: failed to update movie {}. Error: {}", movieTitle, e.getMessage(), e);
             return null;
         }
     }
 
-    public boolean deleteMovieByTitle(String title) {
-        Optional<Movie> movieToDelete = this.movieRepository.findByTitle(title);
+    public boolean deleteMovieByTitle(String movieTitle) {
+        Optional<Movie> movieToDelete = this.movieRepository.findByTitle(movieTitle);
         if (movieToDelete.isEmpty()) {
-            logger.warn("movie with title {} not found, failed to delete non-existing movie", title);
+            logger.warn("movie with title {} not found, cannot delete non-existing movie", movieTitle);
             return false;
         }
 
         // if we here -> movie exists and found -> delete
         try{
             this.movieRepository.delete(movieToDelete.get());
-            logger.info("Info: movie {} deleted successfully", title);
+            logger.info("Info: movie {} deleted successfully", movieTitle);
             return true;
         } catch (Exception e){
-            logger.error("Error: failed to delete movie {}. Error: {}", title, e.getMessage(), e);
+            logger.error("Error: failed to delete movie {}. Error: {}", movieTitle, e.getMessage(), e);
             return false;
         }
     }
@@ -85,13 +85,17 @@ public class MovieService {
         return movie.orElse(null);
     }
 
-    public Movie findMovieByTitle(String title) {
-        logger.info("Info: searching for movie with title {}", title);
-        Optional<Movie> movie = this.movieRepository.findByTitle(title);
+    public Movie findMovieByTitle(String movieTitle) {
+        logger.info("Info: searching for movie with title {}", movieTitle);
+        Optional<Movie> movie = this.movieRepository.findByTitle(movieTitle);
         return movie.orElse(null);
     }
 
     private void prepareToUpdateMovieData(Movie upadatedMovie, Movie newMovie) {
+        /*
+          inner function, helps to prepare upadatedMovie object before sending him to update in the db
+         */
+
         if (newMovie.getGenre() != null) {
             upadatedMovie.setGenre(newMovie.getGenre());
         }

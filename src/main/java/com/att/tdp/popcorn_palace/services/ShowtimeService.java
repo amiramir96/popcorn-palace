@@ -83,7 +83,7 @@ public class ShowtimeService {
         Optional<Showtime> showtime = this.showtimeRepository.findById(showtimeId);
 
         if (showtime.isEmpty()){
-            logger.warn("showtime with id {} not found", showtimeId);
+            logger.warn("showtime with id {} not found, cannot delete non-existing showtime", showtimeId);
             return false;
         }
 
@@ -104,7 +104,7 @@ public class ShowtimeService {
             logger.warn("showtime with moviedId {} not found", movieId);
             return false;
         }
-        
+
         try{
             this.showtimeRepository.deleteAllByMovieId(movieId);
             logger.info("Info: all showtime with movieId {} deleted successfully", movieId);
@@ -121,6 +121,10 @@ public class ShowtimeService {
     }
 
     private void prepareToUpdateShowtimeData(Showtime fromShowtime, Showtime toShowtime){
+        /*
+          inner function, helps to prepare toShowtime object before sending him to update in the db
+         */
+
         if (toShowtime.getTheater() == null){
             toShowtime.setTheater(fromShowtime.getTheater());
         }
