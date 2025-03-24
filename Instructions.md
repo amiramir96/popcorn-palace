@@ -1,60 +1,74 @@
+# 🎬 Popcorn Palace – Project Instructions
 
-🎬 Popcorn Palace – Project Instructions
-Welcome to the Popcorn Palace Cinema Management System! 🍿
+Welcome to the Popcorn Palace Cinema Management System! 🍿  
 This guide will walk you through setting up and running the application locally.
 
-✅ Prerequisites
-Java 17 or higher
+---
 
-Maven
+## ✅ Prerequisites
 
-PostgreSQL (local or via Docker)
+- Java 17 or higher
+- Maven
+- PostgreSQL (local or via Docker)
 
-📦 Project Setup
-Clone the repository:
+---
 
-bash
-Copy
-Edit
-git clone https://github.com/amiramir96/popcorn-palace.git
-cd popcorn-palace
-Install dependencies (optional if you use spring-boot:run):
+## 📦 Project Setup
 
-bash
-Copy
-Edit
-./mvnw clean install
-🐘 PostgreSQL Setup
-Option A – Using Docker (Recommended):
-bash
-Copy
-Edit
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/amiramir96/popcorn-palace.git
+   cd popcorn-palace
+   ```
+
+2. **Install dependencies (optional if you use spring-boot:run):**
+   ```bash
+   ./mvnw clean install
+   ```
+
+---
+
+## 🐘 PostgreSQL Setup
+
+### Option A – Using Docker (Recommended):
+```bash
 docker run --name popcorn-db -e POSTGRES_DB=popcorn_palace -e POSTGRES_USER=popcorn-palace -e POSTGRES_PASSWORD=popcorn-palace -p 5432:5432 -d postgres
-Option B – Manual Installation:
-Make sure you have a postgres user with password popcorn-palace
+```
 
-Create a database named popcorn_palace
+### Option B – Manual Installation:
+- Make sure you have a `postgres` user with password `popcorn-palace`
+- Create a database named `popcorn_palace`
 
-🚀 Running the Application
-bash
-Copy
-Edit
+---
+
+## 🚀 Running the Application
+
+```bash
 ./mvnw spring-boot:run
-The server will start at:
-http://localhost:8080
+```
 
-🧪 Running Tests
-bash
-Copy
-Edit
+The server will start at:  
+`http://localhost:8080`
+
+---
+
+## 🧪 Running Tests
+
+```bash
 ./mvnw test
-Includes full end-to-end integration test in PopcornPalaceApplicationTests.
+```
 
-ℹ️ Notes
-You can change DB settings in src/main/resources/application.properties or application.yaml
+Includes full end-to-end integration test in `PopcornPalaceApplicationTests`.
 
-Use valid ISO 8601 timestamps (UTC) for startTime and endTime fields in JSON
+---
 
-Make sure port 5432 is available and pointing to your Docker container (if used)
+## ℹ️ Notes
 
-Make sure port 8080 is available before running the app
+- You can change DB settings in `src/main/resources/application.properties` or `application.yaml`
+- Use valid ISO 8601 timestamps (UTC) for `startTime` and `endTime` fields in JSON
+- Make sure port 5432 is available and pointing to your Docker container (if used)
+- Make sure port 8080 is available before running the app
+
+---
+
+Good luck and enjoy building with Popcorn Palace! 🙌
